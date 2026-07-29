@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmarGrowth — Founder Waitlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09090B;
+    --white:#FFFFFF;
+    --grey:#A1A1AA;
+    --grey-dim:#71717A;
+    --blue:#4E7FFF;
+    --blue-soft:#8AA9FF;
+    --purple:#7C6CF6;
+    --border:rgba(255,255,255,0.09);
+    --glass:rgba(255,255,255,0.035);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Plus Jakarta Sans', -apple-system, sans-serif;
+    min-height:100svh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- Logo ---------- */
+
+  .logo{
+    position:fixed;
+    top:32px;
+    left:36px;
+    z-index:2;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    color:var(--white);
+    opacity:0;
+    animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay:0s;
+    user-select:none;
+  }
+
+  .logo span{
+    color:var(--blue-soft);
+  }
+
+  /* ---------- Background atmosphere ---------- */
+
+  .bg-layer{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  .glow{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:1500px;
+    height:1500px;
+    transform:translate(-50%,-64%);
+    background:
+      radial-gradient(circle at 50% 34%, rgba(78,127,255,0.24), transparent 46%),
+      radial-gradient(circle at 32% 62%, rgba(78,127,255,0.10), transparent 55%),
+      radial-gradient(circle at 68% 66%, rgba(124,108,246,0.11), transparent 55%);
+    filter:blur(60px);
+    animation:drift 22s ease-in-out infinite;
+  }
+
+  @keyframes drift{
+    0%,100%{ transform:translate(-50%,-64%) scale(1); }
+    50%{ transform:translate(-50%,-62%) scale(1.05); }
+  }
+
+  .grid-overlay{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 40%, #000 0%, transparent 75%);
+    mask-image:radial-gradient(ellipse 60% 50% at 50% 40%, #000 0%, transparent 75%);
+  }
+
+  .noise{
+    position:absolute;
+    inset:0;
+    opacity:0.025;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Layout ---------- */
+
+  .hero{
+    position:relative;
+    z-index:1;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:32px 24px;
+  }
+
+  .content{
+    max-width:640px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* ---------- Badge ---------- */
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    font-size:13px;
+    font-weight:500;
+    color:var(--grey);
+    letter-spacing:0.01em;
+    opacity:0;
+    animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay:0.05s;
+  }
+
+  .badge .dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--blue);
+    box-shadow:0 0 10px 2px rgba(78,127,255,0.7);
+  }
+
+  /* ---------- Headline ---------- */
+
+  h1{
+    margin-top:28px;
+    font-size:clamp(2.1rem, 5.4vw, 3.75rem);
+    font-weight:800;
+    line-height:1.12;
+    letter-spacing:-0.03em;
+    color:var(--white);
+    opacity:0;
+    animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay:0.16s;
+  }
+
+  h1 .accent{
+    background:linear-gradient(100deg, var(--blue-soft) 0%, var(--blue) 45%, var(--purple) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  p.subheadline{
+    margin-top:26px;
+    max-width:460px;
+    font-size:clamp(1rem, 1.6vw, 1.15rem);
+    font-weight:500;
+    line-height:1.6;
+    color:var(--grey);
+    opacity:0;
+    animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay:0.27s;
+  }
+
+  /* ---------- Form ---------- */
+
+  form{
+    margin-top:40px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:100%;
+    max-width:440px;
+    padding:6px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    opacity:0;
+    animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay:0.38s;
+    box-shadow:0 16px 40px -20px rgba(0,0,0,0.65), 0 1px 0 rgba(255,255,255,0.04) inset;
+    transition:border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  form:focus-within{
+    border-color:rgba(78,127,255,0.55);
+    box-shadow:0 16px 40px -20px rgba(0,0,0,0.65), 0 0 0 4px rgba(78,127,255,0.12);
+  }
+
+  input[type="email"]{
+    flex:1;
+    min-width:0;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--white);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:500;
+    padding:12px 16px;
+  }
+
+  input[type="email"]::placeholder{
+    color:var(--grey-dim);
+    font-weight:500;
+  }
+
+  button{
+    position:relative;
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:12px 22px;
+    border-radius:999px;
+    border:none;
+    background:linear-gradient(135deg, var(--blue) 0%, #3D63D6 100%);
+    color:var(--white);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+    box-shadow:0 1px 0 rgba(255,255,255,0.12) inset, 0 8px 24px -8px rgba(78,127,255,0.55);
+    white-space:nowrap;
+  }
+
+  button::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+    transform:translateX(-100%);
+    transition:transform 0.65s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 1px 0 rgba(255,255,255,0.18) inset, 0 16px 32px -8px rgba(78,127,255,0.75);
+  }
+
+  button:hover::before{
+    transform:translateX(100%);
+  }
+
+  button:active{
+    transform:translateY(0px) scale(0.97);
+    transition:transform 0.15s ease;
+  }
+
+  button svg{
+    width:15px;
+    height:15px;
+    transition:transform 0.25s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  button:hover svg{
+    transform:translateX(3px);
+  }
+
+  .microcopy{
+    margin-top:22px;
+    font-size:13px;
+    font-weight:500;
+    color:var(--grey-dim);
+    line-height:1.6;
+    opacity:0;
+    animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay:0.48s;
+  }
+
+  .microcopy span{
+    display:block;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 480px){
+    .logo{
+      top:22px;
+      left:22px;
+      font-size:14px;
+    }
+    form{
+      flex-direction:column;
+      border-radius:20px;
+      padding:8px;
+    }
+    input[type="email"]{
+      width:100%;
+      text-align:center;
+      padding:12px 14px;
+    }
+    button{
+      width:100%;
+      padding:13px 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .badge, h1, p.subheadline, form, .microcopy{
+      animation:none;
+      opacity:1;
+    }
+    .glow{ animation:none; }
+  }
+
+  button:focus-visible,
+  input:focus-visible{
+    outline:2px solid var(--blue-soft);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="logo">Omar<span>Growth</span></div>
+
+  <div class="bg-layer">
+    <div class="glow"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+  </div>
+
+  <main class="hero">
+    <div class="content">
+
+      <div class="badge">
+        <span class="dot"></span>
+        Founder Waitlist
+      </div>
+
+      <h1>Build an audience<br>that grows your <span class="accent">business.</span></h1>
+
+      <p class="subheadline">
+        Grow faster, save time, and monetize on X — with systems that actually work.
+      </p>
+
+      <form id="waitlist-form">
+        <input type="email" id="email" placeholder="Enter your email" required autocomplete="email">
+        <button type="submit">
+          Join the Waitlist
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+
+      <p class="microcopy">
+        <span>Be the first to access our guides, templates and tools.</span>
+        <span>No spam. Unsubscribe anytime.</span>
+      </p>
+
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('waitlist-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const original = btn.innerHTML;
+      btn.innerHTML = "You're in ✓";
+      btn.style.pointerEvents = 'none';
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.pointerEvents = 'auto';
+        e.target.reset();
+      }, 2400);
+    });
+  </script>
+
+</body>
+</html>
